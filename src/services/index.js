@@ -1,11 +1,13 @@
+import axios from "axios";
+
 const url = process.env.REACT_APP_SERVER;
 
 export const obtenerBusqueda = async (busqueda) => {
   try {
-    const response2 = await fetch(`${url}/art_api/search?busqueda=${busqueda}`);
-    const responseJson2 = await response2.json();
-
-    return responseJson2.data;
+    const response2 = await axios.get(
+      `${url}/art_api/search?busqueda=${busqueda}`
+    );
+    return response2.data.data;
   } catch (error) {
     console.log(error);
   }
@@ -13,9 +15,9 @@ export const obtenerBusqueda = async (busqueda) => {
 
 export const obtenerObras = async () => {
   try {
-    const response = await fetch(`${url}/art_api/art_works`);
-    const responseJson = await response.json();
-    return responseJson.data;
+    const response = await axios.get(`${url}/art_api/art_works`);
+    console.log(response.data);
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }
@@ -23,10 +25,10 @@ export const obtenerObras = async () => {
 
 export const cargarMas = async (pagina) => {
   try {
-    const response = await fetch(`${url}/art_api/page_mas?pagina=${pagina}`);
-    const responseJson = await response.json();
-
-    return responseJson.data;
+    const response = await axios.get(
+      `${url}/art_api/page_mas?pagina=${pagina}`
+    );
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }
@@ -34,10 +36,10 @@ export const cargarMas = async (pagina) => {
 
 export const cargarMenos = async (pagina) => {
   try {
-    const response = await fetch(`${url}/art_api/page_menos?pagina=${pagina}`);
-    const responseJson = await response.json();
-
-    return responseJson.data;
+    const response = await axios.get(
+      `${url}/art_api/page_menos?pagina=${pagina}`
+    );
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }
@@ -45,10 +47,8 @@ export const cargarMenos = async (pagina) => {
 
 export const obtenerDetalles = async (id) => {
   try {
-    const response = await fetch(`${url}/art_api/art_work/${id}`);
-    const responseJson = await response.json();
-    console.log(responseJson.data);
-    return responseJson.data;
+    const response = await axios.get(`${url}/art_api/art_work/${id}`);
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }
@@ -56,49 +56,35 @@ export const obtenerDetalles = async (id) => {
 
 export const formulario = async (data) => {
   try {
-    const response = await fetch(`${url}/message`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
-    return response.json();
+    const response = await axios.post(`${url}/message`, data);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 };
 
 export const registrarse = async (data) => {
   try {
-    const response = await fetch(`${url}/users`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
-    return response.json();
+    const response = await axios.post(`${url}/users`, data);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 };
 
 export const login = async (data) => {
   try {
-    const response = await fetch(`${url}/auth/login`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
-    const respuesta = await response.json();
-    if (respuesta.token) {
+    const respuesta = await axios.post(`${url}/auth/login`, data);
+
+    if (respuesta.data.token) {
       localStorage.setItem("token", respuesta.token);
     } else {
       localStorage.removeItem("token");
     }
-    return respuesta;
+    return respuesta.data;
   } catch (error) {
     localStorage.removeItem("token");
-    return {
-      error,
-    };
+    return error.response.data;
   }
 };
 
