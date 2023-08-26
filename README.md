@@ -12,4 +12,4 @@ En la raiz del proyecto debes crear un archivo con la extensión .env en el cual
 Insertar el la terminal de tu editor el comando "npm install" (instalaras todas las dependencias para que el proyecto funcione correctamente)
 Insertar el comando "npm start" (se ejecutará el proyecto activando el servidor).
 
-• Sitio Web mediante la plataforma de nube Vecel https://arte-de-chicago-front.vercel.app/
+• Sitio Web mediante la plataforma de nube Vercel https://arte-de-chicago-front.vercel.app/
