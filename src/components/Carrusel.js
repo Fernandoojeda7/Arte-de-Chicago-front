@@ -1,15 +1,14 @@
 import React from "react";
 import { Carousel, Image } from "react-bootstrap";
-import { useBootstrapBreakpoints } from "react-bootstrap/esm/ThemeProvider";
 
 const items = [
   {
-    src: require("../assets/imagenes/obra1.jpg"),
+    src: require("../assets/imagenes/obra7.jpg"),
     altText: "",
     caption: "",
   },
   {
-    src: require("../assets/imagenes/obra2.jpg"),
+    src: require("../assets/imagenes/obra6.jpg"),
     altText: "",
     caption: "",
   },
@@ -19,7 +18,7 @@ const items = [
     caption: "",
   },
   {
-    src: require("../assets/imagenes/obra4.jpg"),
+    src: require("../assets/imagenes/obra5.jpg"),
     altText: "",
     caption: "",
   },
@@ -34,7 +33,7 @@ const Carrusel = () => {
             <Image
               src={item.src}
               alt={item.altText}
-              style={{ objectFit: "cover", width: "100%", height: "50vh" }}
+              style={{ width: "100%", height: "65vh" }}
             />
             <Carousel.Caption
               captionText={item.caption}
